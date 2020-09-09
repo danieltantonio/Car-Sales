@@ -6,22 +6,26 @@ import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 
-import { addPrice } from './actions';
+import { addPrice, rmPrice } from './actions';
 
 const App = (props) => {
 
-  const buttonOnClick = (price) => {
-    props.addPrice({ price });
+  const addPriceOnClick = (price, feature) => {
+    props.addPrice({ price, feature });
+  }
+
+  const delPriceOnClick = (price, feature) => {
+    props.rmPrice({ price, feature });
   }
 
   return (
     <div className="boxes">
       <div className="box">
         <Header car={props.car} />
-        <AddedFeatures car={props.car} />
+        <AddedFeatures car={props.car} delPriceOnClick={delPriceOnClick}/>
       </div>
       <div className="box">
-        <AdditionalFeatures buttonOnClick={buttonOnClick} additionalFeatures={props.additionalFeatures} />
+        <AdditionalFeatures addPriceOnClick={addPriceOnClick} additionalFeatures={props.additionalFeatures} />
         <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
@@ -36,4 +40,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, { addPrice })(App);
+export default connect(mapStateToProps, { addPrice, rmPrice })(App);

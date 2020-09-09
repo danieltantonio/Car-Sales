@@ -1,3 +1,5 @@
+import { ADD_PRICE } from '../actions';
+
 export const initialState = {
     additionalPrice: 0,
     car: {
@@ -16,10 +18,12 @@ export const initialState = {
   };
 
   export const priceReducer = (state = initialState, action) => {
+    console.log('PRICE REDUCER ADD_PRICE', action)
       switch(action.type) {
-          case 'ADD_PRICE':
+          case ADD_PRICE:
               return {
-                  ...state
+                  ...state,
+                  additionalPrice: state.additionalPrice + action.payload.price
               }
 
           default:

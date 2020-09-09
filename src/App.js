@@ -9,6 +9,11 @@ import Total from './components/Total';
 import { addPrice } from './actions';
 
 const App = (props) => {
+
+  const buttonOnClick = (price) => {
+    props.addPrice({ price });
+  }
+
   return (
     <div className="boxes">
       <div className="box">
@@ -16,7 +21,7 @@ const App = (props) => {
         <AddedFeatures car={props.car} />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={props.additionalFeatures} />
+        <AdditionalFeatures buttonOnClick={buttonOnClick} additionalFeatures={props.additionalFeatures} />
         <Total car={props.car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
@@ -29,6 +34,6 @@ const mapStateToProps = (state) => {
     car: state.car,
     additionalFeatures: state.additionalFeatures
   }
-}
+};
 
 export default connect(mapStateToProps, { addPrice })(App);
